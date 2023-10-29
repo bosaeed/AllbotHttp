@@ -1,18 +1,13 @@
 ﻿//using Microsoft.Extensions.Logging;
 using AllbotHttp.Models;
+using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Diagnostics;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 //using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-using RestSharp;
-using RestSharp.Authenticators;
-using System.Threading;
-using System.Xml.Linq;
-using static System.Collections.Specialized.BitVector32;
 
 
 namespace AllbotHttp
@@ -57,7 +52,7 @@ namespace AllbotHttp
                 Authenticator = authenticator
             };
             client = new RestClient(options);
-            
+
             client.AddDefaultHeader("Accept", "application/json");
             client.AddDefaultHeader("Content-Type", "application/json");
             _email = email;
@@ -94,11 +89,11 @@ namespace AllbotHttp
         {
             if (_debug)
             {
-                string logmsg = $"AllbotHTTP: {DateTime.Now} : {msg} ";//"AllbotHTTP " + " " + msg;
+                string logmsg = $"AllbotHTTP: {msg}";
 
                 if (uselognet)
                 {
-                    _lognet.Info(logmsg);
+                    _lognet.Debug(logmsg);
                 }
                 else
                 {
@@ -119,7 +114,7 @@ namespace AllbotHttp
         {
             if (_debug)
             {
-                string logmsg = $"AllbotHTTP: {DateTime.Now} : {msg} ";//"AllbotHTTP " + " " + msg;
+                string logmsg = $"AllbotHTTP: {msg}";
 
                 if (uselognet)
                 {
@@ -180,7 +175,7 @@ namespace AllbotHttp
                 }
 
                 //HttpResponseMessage response = await client.PostAsJsonAsync(currentroutes.session_route, sessionInfo);
-                var request = new RestRequest(currentroutes.session_route , Method.Post);
+                var request = new RestRequest(currentroutes.session_route, Method.Post);
                 request.AddJsonBody(sessionInfo);
                 //request.RequestFormat = DataFormat.Json;
                 //request.AddHeader("Content-Type", "application/json");
@@ -213,7 +208,7 @@ namespace AllbotHttp
                 Log(err.ToString());
                 return session;
             }
-            catch(Exception err)
+            catch (Exception err)
             {
                 Log(err.ToString());
                 return session;
@@ -282,7 +277,7 @@ namespace AllbotHttp
         public async Task<SubscriptionInfo> SubscriptionInfo(string deviceid)
         {
             SubscriptionInfo subscriptionInfo = null;
-            var deviceInfo = new DeviceInfo() { deviceuid = deviceid};
+            var deviceInfo = new DeviceInfo() { deviceuid = deviceid };
             try
             {
                 if (!await setToken())
