@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AllbotHttp
 {
@@ -18,6 +19,8 @@ namespace AllbotHttp
         public bool sms { get; set; }
 
         public bool hide_message { get; set; } = false;
+
+        public Dictionary<string,object> keyValuePairs { get; set; }
 
         public override string ToString()
         {
