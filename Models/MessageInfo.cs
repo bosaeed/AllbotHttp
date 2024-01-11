@@ -22,10 +22,45 @@ namespace AllbotHttp
 
         public Dictionary<string,object> keyValuePairs { get; set; }
 
+        public string file64 { get; set; } = "";
+
+        public string doctype { get; set; } = "";
+
+
+
+        public string buttonText { get; set; } = "";
+
+        public string buttonDescription { get; set; } = "";
+        public string buttonTitle { get; set; } = "";
+        
+        public string buttonFooter { get; set; } = "";
+
+        public ListSection[] sections { get; set; } = null;
+
+
+
         public override string ToString()
         {
             return $"{mobile} ,\n{message} ,\n{status} ,\n{error}";
         }
+
+    }
+
+
+
+    public class ListRow
+    {
+        public string rowId { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+
+    }
+
+    public class ListSection
+    {
+        public string title { get; set; }
+        public ListRow[] rows { get; set; }
+
 
     }
 }
