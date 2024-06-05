@@ -20,6 +20,8 @@ namespace AllbotHttp
 
         public bool hide_message { get; set; } = false;
 
+        public bool is_managment { get; set; } = false;
+
         public Dictionary<string,object> keyValuePairs { get; set; }
 
         public string file64 { get; set; } = "";
