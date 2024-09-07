@@ -26,9 +26,15 @@ namespace AllbotHttp
 
         public string file64 { get; set; } = "";
 
+        public string path { get; set; } = "";
+        public string fileName { get; set; } = "";
+
         public string doctype { get; set; } = "";
 
-
+        public bool sendPDF { get; set; } = false;
+        public string constr { get; set; }
+        public string pdfProgram { get; set; }
+        public string docId { get; set; }
 
         public string buttonText { get; set; } = "";
 
