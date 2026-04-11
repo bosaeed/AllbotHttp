@@ -9,7 +9,8 @@ namespace AllbotHttp
                String send_message_route = "api/send_message",
                String testconnection_route = "api/testconnection",
                String login_route = "api/login",
-               String subscription_route = "api/subscription"
+               String subscription_route = "api/subscription",
+               String log_route = "api/log_info"
                )
         {
 
@@ -19,6 +20,7 @@ namespace AllbotHttp
             this.testconnection_route = testconnection_route;
             this.login_route = login_route;
             this.subscription_route = subscription_route;
+            this.log_route = log_route;
             //this.test_route = test_route;
 
         }
@@ -29,6 +31,7 @@ namespace AllbotHttp
         //public string test_route;
         public string login_route;
         public string subscription_route;
+        public String log_route;
         public override string ToString()
         {
             return $"{session_route} \n{send_message_route} \n{testconnection_route} \n{login_route}\n";

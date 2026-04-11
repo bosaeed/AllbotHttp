@@ -168,11 +168,11 @@ namespace AllbotHttp
                 var request = new RestRequest(currentroutes.subscription_route, Method.Post);
                 request.AddJsonBody(deviceInfo);
 
-                var response = await client.PostAsync<SubscriptionInfo>(request);
+                 subscriptionInfo = await client.PostAsync<SubscriptionInfo>(request);
 
 
                  return subscriptionInfo;
-                return response;
+                //return response;
             }
             catch (HttpRequestException err)
             {
@@ -186,6 +186,32 @@ namespace AllbotHttp
             }
 
         }
+
+
+        public async Task SendLogToServerAsync(string message, string level = "Error")
+        {
+            try
+            {
+                var logData = new { Message = message, Level = level, Timestamp = DateTime.UtcNow };
+                var request = new RestRequest(currentroutes.log_route, Method.Post);
+
+                request.AddJsonBody(logData);
+                if (!await setToken())
+                {
+                    LogError("can not set token");
+                    return ;
+                }
+
+                await client.PostAsync(request);
+            }
+            catch (Exception ex)
+            {
+                // Optionally handle/log local failures to send logs
+                Trace.TraceError($"Failed to send log to server: {ex}");
+            }
+        }
+
+
 
         public async Task<string> LoginAsync(string email = null, string password = null)
         {
